@@ -103,7 +103,7 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
       success = true;
     }
 
-    condition.signal();
+    condition.signalAll();
     lock.unlock();
 
     if(!success) {
@@ -127,7 +127,7 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
       val = t;
     }
 
-    condition.signal();
+    condition.signalAll();
     lock.unlock();
 
     if(val == null) {
@@ -184,7 +184,7 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
       tail++;
     }
 
-    condition.signal();
+    condition.signalAll();
     lock.unlock();
 
     return size;
@@ -209,7 +209,7 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
       success = true;
     }
 
-    condition.signal();
+    condition.signalAll();
     lock.unlock();
 
     return success;
@@ -226,7 +226,7 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
         buffer[(int)(head & buffermask)] = e;
         head++;
 
-        condition.signal();
+        condition.signalAll();
         lock.unlock();
         return;
       }
@@ -249,7 +249,7 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
       if (head - tail < buffermask) {
         buffer[(int)(head & buffermask)] = e;
         head++;
-        condition.signal();
+        condition.signalAll();
         lock.unlock();
         return true;
       }
@@ -273,7 +273,7 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
         T t = buffer[pos];
         buffer[pos] = null;
         tail++;
-        condition.signal();
+        condition.signalAll();
         lock.unlock();
         return t;
       }
@@ -298,7 +298,7 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
         T t = buffer[pos];
         buffer[pos] = null;
         tail++;
-        condition.signal();
+        condition.signalAll();
         lock.unlock();
         return t;
       }
@@ -343,7 +343,7 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
       tail++;
     }
 
-    condition.signal();
+    condition.signalAll();
     lock.unlock();
 
     return i;
@@ -363,7 +363,7 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
       tail++;
     }
 
-    condition.signal();
+    condition.signalAll();
     lock.unlock();
 
     return val;
@@ -379,7 +379,7 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
     buffer[pos] = null;
     tail++;
 
-    condition.signal();
+    condition.signalAll();
     lock.unlock();
 
     return t;
@@ -481,7 +481,7 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
         T t = buffer[pos];
         buffer[pos] = null;
         tail++;
-        condition.signal();
+        condition.signalAll();
         lock.unlock();
         return t;
       }
@@ -507,7 +507,7 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
       buffer[pos] = null;
       tail++;
     }
-    condition.signal();
+    condition.signalAll();
     lock.unlock();
     return array;
   }
@@ -531,7 +531,7 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
       tail++;
     }
 
-    condition.signal();
+    condition.signalAll();
     lock.unlock();
 
     return a;
@@ -570,7 +570,7 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
     tail = 0;
     Arrays.fill(buffer, null);
 
-    condition.signal();
+    condition.signalAll();
     lock.unlock();
   }
 
