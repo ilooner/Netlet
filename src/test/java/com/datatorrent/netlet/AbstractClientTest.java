@@ -61,6 +61,8 @@ public class AbstractClientTest
     @Override
     public void read(int len)
     {
+      logger.debug("read called {} {}", buffer.position(), buffer.capacity());
+
       if (buffer.position() == buffer.capacity()) {
         buffer.flip();
         read = true;
@@ -78,6 +80,7 @@ public class AbstractClientTest
     @Override
     public void connected()
     {
+      logger.debug("connected");
     }
 
     @Override
@@ -119,10 +122,10 @@ public class AbstractClientTest
 
     byte[] array = outboundBuffer.array();
     while (!ci.send(array, 0, array.length)) {
-      sleep(5);
+      sleep(50);
     }
 
-    sleep(100);
+    sleep(500);
 
     el.disconnect(ci);
     el.stop(si);
