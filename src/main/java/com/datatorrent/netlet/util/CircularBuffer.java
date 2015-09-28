@@ -40,8 +40,8 @@ public class CircularBuffer<T> implements UnsafeBlockingQueue<T>
   private final T[] buffer;
   private final int buffermask;
   private final int spinMillis;
-  protected volatile long tail;
-  protected volatile long head;
+  protected long tail;
+  protected long head;
 
   private Lock lock = new ReentrantLock();
   private Condition condition = lock.newCondition();
