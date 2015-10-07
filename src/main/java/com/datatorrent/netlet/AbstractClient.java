@@ -127,7 +127,7 @@ public abstract class AbstractClient implements ClientListener
       }
     }
     else {
-      logger.debug("{} read 0 bytes", this);
+      logger.trace("{} read 0 bytes", this);
     }
   }
 
