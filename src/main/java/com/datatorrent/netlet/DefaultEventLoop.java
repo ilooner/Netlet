@@ -118,6 +118,9 @@ public class DefaultEventLoop implements Runnable, EventLoop
     try {
       runEventLoop();
     }
+    catch (Throwable t) {
+      logger.debug("Caught error", t);
+    }
     finally {
       if (alive) {
         alive = false;
