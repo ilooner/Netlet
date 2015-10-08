@@ -178,9 +178,17 @@ public class OptimizedEventLoop extends DefaultEventLoop
           if (selector.selectNow() == 0) {
             continue;
           }
-        } else if (selector.select() == 0) {
+        } else {
+          Set<SelectionKey> keysT = selector.keys();
+          for (SelectionKey key1 : keysT) {
+            if (key1.isValid() && !key1.isReadable()) {
+              logger.debug("selecting with key {} {} not readable", key1, key1.attachment());
+            }
+          }
+          if (selector.select() == 0) {
               continue;
             }
+        }
       } catch (IOException e) {
         logger.error("Unexpected exception in selector {}", selector, e);
         throw new RuntimeException(e);
