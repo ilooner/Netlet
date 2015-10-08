@@ -181,7 +181,7 @@ public class OptimizedEventLoop extends DefaultEventLoop
         } else {
           Set<SelectionKey> keysT = selector.keys();
           for (SelectionKey key1 : keysT) {
-            if (key1.isValid() && key1.attachment() != null && key1.attachment().getClass().getName().contains("Publisher")&& !key1.isReadable()) {
+            if (key1.isValid() && key1.attachment() != null && key1.attachment().getClass().getName().equals("com.datatorrent.bufferserver.server.Server$Publisher") && !key1.isReadable()) {
               logger.debug("selecting with key {} {} not readable", key1, key1.attachment());
             }
           }
